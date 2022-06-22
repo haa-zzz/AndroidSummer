@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/te_id"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/Black"
+        android:textSize="30sp"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/te_name"
+        android:text="张三"
+        android:textColor="@color/Black"
+        android:layout_toRightOf="@+id/te_id"
+        android:layout_marginLeft="30dp"
+        android:textSize="30sp"
+        android:layout_alignTop="@+id/te_id"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/te_phonenum"
+        android:text="10086"
+        android:textColor="@color/Black"
+        android:textSize="30sp"
+        android:layout_toRightOf="@+id/te_name"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignTop="@+id/te_name"/>
+</RelativeLayout>
