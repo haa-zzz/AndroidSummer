@@ -5,6 +5,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.asus.deliveryapplication.utils.CommonUtils;
 import java.util.List;
 
+/**
+ * listView RecyclerView对应的Adapter,用于协助列表完成数据加载和展示
+ * @param <T>
+ */
 public class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
 
     private List<T> mList;

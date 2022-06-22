@@ -7,7 +7,9 @@ import android.content.Context;
 import com.example.asus.deliveryapplication.Bmob.BmobManager;
 import com.example.asus.deliveryapplication.utils.SpUtils;
 
-
+/**
+ * 初始化BMob
+ */
 public class BaseApp extends Application {
 
     private static Context sContext;
