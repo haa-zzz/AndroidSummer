@@ -31,6 +31,10 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+/**
+ * 精选
+ * 和GoodGroupFragment基本完全一样 （为啥不复用？？？？）
+ */
 public class GoodTuiFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -94,6 +98,7 @@ public class GoodTuiFragment extends Fragment {
         refreshLayout.autoRefresh();
         queryData(0, STATE_REFRESH);
     }
+    //查询数据，去云数据库BMob中查询对应的数据
     private void queryData(int page, final int actionType) {
 
         BmobQuery<TourTui> query = new BmobQuery<>();
@@ -118,6 +123,7 @@ public class GoodTuiFragment extends Fragment {
                             data.addAll(list);
                             adapter.refresh(list);
                         }else{
+                            //查完后去更新列表信息
                             adapter.add(list);
                         }
                         curPage++;

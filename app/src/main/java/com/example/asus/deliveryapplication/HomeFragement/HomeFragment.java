@@ -41,6 +41,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+/**
+ * 首页，
+ */
 public class HomeFragment extends Fragment implements MyScrollView.OnScrollListener, View.OnClickListener {
     private MyScrollView myScrollView;
     private View view;
@@ -67,8 +70,7 @@ public class HomeFragment extends Fragment implements MyScrollView.OnScrollListe
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         view.getViewTreeObserver().addOnWindowFocusChangeListener(new ViewTreeObserver.OnWindowFocusChangeListener() {
             @Override
@@ -82,7 +84,7 @@ public class HomeFragment extends Fragment implements MyScrollView.OnScrollListe
         banner = view.findViewById(R.id.banner);
         init(view);
         recyclerView = view.findViewById(R.id.RecyclerView);
-        StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setReverseLayout(false);
         homeAdapter = new HomeAdapter(getActivity(), data);
         recyclerView.setLayoutManager(layoutManager);

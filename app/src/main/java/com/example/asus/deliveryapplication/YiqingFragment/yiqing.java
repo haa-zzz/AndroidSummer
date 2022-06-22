@@ -18,6 +18,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * 疫情查询页面
+ * 刷新后可以看到各个地区的疫情信息
+ *      主要就是调用了一个网上的api接口，拿到数据后解析然后交给ListView去展示
+ */
 public class yiqing extends AppCompatActivity {
     private ListView lvNews;
     private NewsAdapter adapter;
@@ -44,8 +49,9 @@ public class yiqing extends AppCompatActivity {
             }
         });
     }
-
+    //通过OKHttp发起get请求，并拿到对应的数据
     private void sendRequestWithOKHttp(){
+        //网络请求比较耗时，在子线程中发起
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -72,7 +78,9 @@ public class yiqing extends AppCompatActivity {
             }
         }).start();
     }
-
+    /**
+     * 对数据进行Gson解析，并吧结果添加到dataList，然后刷新listView
+     */
     private void parseJsonWithGson(String jsonData){
         Gson gson = new Gson();
         News news = gson.fromJson(jsonData, News.class);
@@ -83,6 +91,7 @@ public class yiqing extends AppCompatActivity {
             String province = list.get(i).getProvince();
             String county = list.get(i).getCounty();
             dataList.add(new High_list(type, city,county,province));
+            lvNews.refreshDrawableState();
         }
     }
 }

@@ -31,6 +31,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+/**
+ * 门票
+ */
 public class GoodTicketFragment extends Fragment {
 
     private RecyclerView recyclerView;

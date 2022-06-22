@@ -31,7 +31,6 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
     private Button bt_out;
     private TextView te_login;
     private View view;
-    private MyBroadcast myBroadcast;
     private MySQLiteOpenHelper openHelper;
     private SQLiteDatabase writableDatabase;
     private RadioGroup radioGroup;
@@ -57,10 +56,8 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
                 startActivityForResult(intent,10);
             }
         });
-        myBroadcast = new MyBroadcast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.lcg.update");
-        LocalBroadcastManager.getInstance(view.getContext()).registerReceiver(myBroadcast,intentFilter);
         int mCurrentOrientation = getResources().getConfiguration().orientation;
         if (mCurrentOrientation == Configuration.ORIENTATION_PORTRAIT) {
             myPagerAdapter = new MyPagerAdapter(getFragmentManager());
@@ -155,22 +152,6 @@ public class MyFragment extends Fragment implements RadioGroup.OnCheckedChangeLi
         }
     }
 
-    private class MyBroadcast extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            switch (intent.getAction()){
-                case "com.lcg.update":
-                    bt_out.setText("注销用户");
-                    bt_out.setBackgroundColor(Color.parseColor("#03a9f4"));
-                    break;
-            }
-        }
-    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        LocalBroadcastManager.getInstance(view.getContext()).unregisterReceiver(myBroadcast);
-    }
 
 }

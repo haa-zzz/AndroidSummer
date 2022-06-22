@@ -15,6 +15,9 @@ import android.widget.TextView;
 import com.example.asus.deliveryapplication.MyFragment.LoginActivity;
 import com.example.asus.deliveryapplication.R;
 
+/**
+ * 疫情查询Fragment
+ */
 public class YiqingFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
 
     private TextView tv_yq;
@@ -25,6 +28,7 @@ public class YiqingFragment extends Fragment implements RadioGroup.OnCheckedChan
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.fragment_yiqing,container,false);
         tv_yq=view.findViewById(R.id.tv_yq);
+        //设置点击事件，点击后跳转到查询疫情的页面
         tv_yq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

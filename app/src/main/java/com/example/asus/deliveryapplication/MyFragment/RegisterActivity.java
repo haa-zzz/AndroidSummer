@@ -23,6 +23,9 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 
+/**
+ * 注册页面
+ */
 public class RegisterActivity extends AppCompatActivity {
     private Button bt1;
     private EditText et_User,et_Psw,et_Psw2;
@@ -38,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_Psw2 = findViewById(R.id.et_psw2);
         openHelper = new MySQLiteOpenHelper(RegisterActivity.this, "user.db", null, 1);
 
+        //点击注册，进行简单判断后，如果符合规范，注册用户，添加到本地数据库SQLite
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }else if(!et_Psw2.getText().toString().equals(et_Psw.getText().toString())){
                     Toast.makeText(RegisterActivity.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
                 }else{
+                    //这个就是往数据库里写数据了
                     writableDatabase = openHelper.getWritableDatabase();
                     ContentValues values = new ContentValues();
                     values.put("name",et_User.getText().toString());

@@ -1,27 +1,22 @@
 package com.example.asus.deliveryapplication;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import com.example.asus.deliveryapplication.broadcast.MyReceiver;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+    进来的第一个activity, 是一张app相关的图片，用于过渡。
+ */
 public class MainActivity extends AppCompatActivity {
     private Handler handler;
-    private MyReceiver mMyReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        makeStatusBarTransparent(MainActivity.this);
+        //设置一个两秒的延时，两秒后，启东整体的Activity
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -30,32 +25,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }, 2000);
-        mMyReceiver=new MyReceiver();
-        IntentFilter filter=new IntentFilter();
-        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        registerReceiver(mMyReceiver,filter);
-    }
-
-    public static void makeStatusBarTransparent(Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
-        Window window = activity.getWindow();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            int option = window.getDecorView().getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-            window.getDecorView().setSystemUiVisibility(option);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
-        else {
-            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mMyReceiver);
     }
 }

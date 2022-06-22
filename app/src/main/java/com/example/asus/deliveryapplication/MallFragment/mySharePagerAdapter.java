@@ -4,13 +4,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+/**
+ * 看世界页面 pageView对于的Adapter。用它来协助pageView完成页面的加载，切换
+ */
 public class mySharePagerAdapter extends FragmentPagerAdapter {
 
     private final int PAGE_COUNT = 5;
+    //精选
     private GoodTuiFragment myFragment1;
+    //跟团游
     private GoodGroupFragment myFragment2;
+    //门票
     private GoodTicketFragment myFragment3;
+    //出行
     private GoodTrafficFragment myFragment4;
+    //住房
     private GoodHotelFragment myFragment5;
 
     public mySharePagerAdapter(FragmentManager fm) {

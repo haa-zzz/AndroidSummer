@@ -31,6 +31,9 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+/**
+ * 出行
+ */
 public class GoodTrafficFragment extends Fragment {
 
     private RecyclerView recyclerView;

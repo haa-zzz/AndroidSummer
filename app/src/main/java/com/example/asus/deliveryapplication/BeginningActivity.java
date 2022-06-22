@@ -1,5 +1,6 @@
 package com.example.asus.deliveryapplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
@@ -18,8 +19,12 @@ import com.example.asus.deliveryapplication.MallFragment.MallFragment;
 import com.example.asus.deliveryapplication.MyFragment.MyFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+/**
+ * 这是App整体的Activity， 里面主要是一个BottomNavigationView，用于去容纳底部的四个fragment
+ */
 public class BeginningActivity extends AppCompatActivity {
-    private BottomNavigationView navigationView;
+    private BottomNavigationView navigationView;    //BottomNavigationView，底部导航栏
+    //四个页面的fragment
     private Fragment HomeFragment;
     private Fragment MallFragment;
     private Fragment OrderFragment;
@@ -35,9 +40,11 @@ public class BeginningActivity extends AppCompatActivity {
         initFragment();
     }
 
+    //初始化，主要就是设置点击时的Fragment跳转(写的很丑陋，懒得改了)
     private void initFragment() {
+        //获取navigationView实例
         navigationView = findViewById(R.id.bnv_main);
-        navigationView.setItemIconTintList(null);
+        //设置监听
         navigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         HomeFragment = new HomeFragment();
@@ -46,6 +53,7 @@ public class BeginningActivity extends AppCompatActivity {
         MyFragment = new MyFragment();
         fragmentlist = new Fragment[]{HomeFragment,MallFragment,OrderFragment,MyFragment};
         lastFragment = 0;
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_main,HomeFragment).show(HomeFragment).commit();
         navigationView.setSelectedItemId(R.id.navigation_home);
     }
@@ -96,6 +104,7 @@ public class BeginningActivity extends AppCompatActivity {
         navigationView.getMenu().findItem(R.id.navigation_my).setIcon(R.drawable.myb);
     }
 
+    //做切换fragment的操作
     private void switchFragment(int lastFragment, int index) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(fragmentlist[lastFragment]);
@@ -104,7 +113,7 @@ public class BeginningActivity extends AppCompatActivity {
         }
         transaction.show(fragmentlist[index]).commitAllowingStateLoss();
     }
-
+    //系统状态栏的一些设置，可以忽略
     public static void makeStatusBarTransparent(Activity activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return;

@@ -30,7 +30,10 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-
+/**
+ * 跟团游
+ * 用一个RecyclerView去容纳数据库中的精选的数据
+ */
 public class GoodGroupFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -50,6 +53,10 @@ public class GoodGroupFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 初始化View, 主要就是对recyclerView进行初始化，设置Manager，设置adapter
+     * @param view
+     */
     private void initView(View view) {
         recyclerView = view.findViewById(R.id.mRecyclerView);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
@@ -94,6 +101,12 @@ public class GoodGroupFragment extends Fragment {
         refreshLayout.autoRefresh();
         queryData(0, STATE_REFRESH);
     }
+
+    /**
+     * 去BMob中查询数据，并吧结果同步给adapter，去刷新数据
+     * @param page
+     * @param actionType
+     */
     private void queryData(int page, final int actionType) {
 
         BmobQuery<TourGroup> query = new BmobQuery<>();

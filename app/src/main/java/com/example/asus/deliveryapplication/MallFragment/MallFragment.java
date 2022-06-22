@@ -13,7 +13,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.asus.deliveryapplication.R;
-
+/**
+ * 看世界
+ *
+ * 主要就是使用了一个ViewPager，包含精选，跟团游，门票。。。。
+ */
 public class MallFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, ViewPager.OnPageChangeListener {
     private RadioGroup radioGroup;
     private RadioButton radioButtonShow, radioButtonClock,radioButtonqita,radioButtonTime, radioButtonMy;
@@ -52,6 +56,7 @@ public class MallFragment extends Fragment implements RadioGroup.OnCheckedChange
         viewPager.addOnPageChangeListener(this);
     }
 
+    //精选，跟团游，门票。。。。这些点击之后，更新下面的ViewPager页面
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         switch (i) {
@@ -82,7 +87,7 @@ public class MallFragment extends Fragment implements RadioGroup.OnCheckedChange
     public void onPageSelected(int position) {
 
     }
-
+    //滑动ViewPager的监听，滑动之后，上面的精选，跟团游，门票。。。。选中状态要随之改变
     @Override
     public void onPageScrollStateChanged(int state) {
         if (state == 2) {

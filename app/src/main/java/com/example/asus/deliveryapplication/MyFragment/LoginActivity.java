@@ -24,6 +24,11 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.asus.deliveryapplication.R;
 
+/**
+ * 登录页面
+ * 使用本地数据库SQLite来存储用户信息。登录时检查name，password是否存在和匹配
+ * 同时还有一个查询手机联系人的功能
+ */
 public class LoginActivity extends AppCompatActivity {
     private EditText et1,et2;
     private TextView tv1;
@@ -51,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         et2=findViewById(R.id.et_psw);
         tv1 = findViewById(R.id.tv_register);
         bt1=findViewById(R.id.btn_login);
+        //点击注册账号，跳转到RegisterActivity
         tv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,14 +64,18 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //点击登录按钮
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //用户名为空，给个提示
                 if (et1.getText().toString().equals("")) {
                     Toast.makeText(LoginActivity.this,"请输入用户名",Toast.LENGTH_SHORT).show();
-                }else if(et2.getText().toString().equals("")){
+
+                }else if(et2.getText().toString().equals("")){   //密码为空，给个提示
                     Toast.makeText(LoginActivity.this,"请输入密码",Toast.LENGTH_SHORT).show();
                 }else{
+                    //读取数据库用户信息，看看匹不匹配
                     openHelper = new MySQLiteOpenHelper(LoginActivity.this, "user.db", null, 1);
                     writableDatabase = openHelper.getWritableDatabase();
                     Cursor user = writableDatabase.query("user", new String[]{"name", "password"}, "name=?", new String[]{et1.getText().toString()}, null, null, null);
@@ -75,16 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                         }else if(!user.getString(user.getColumnIndex("password")).equals(et2.getText().toString())){
                             Toast.makeText(LoginActivity.this,"用户名或密码错误",Toast.LENGTH_SHORT).show();
                         }else{
+                            //这种就是匹配上了，携带用户名跳转到我的页面
                             Intent data = new Intent();
                             Bundle bundle = new Bundle();
                             bundle.putString("name",et1.getText().toString());
                             bundle.putString("password",et2.getText().toString());
                             data.putExtras(bundle);
                             Intent intent = new Intent("com.lcg.update");
-                            LocalBroadcastManager.getInstance(LoginActivity.this).sendBroadcast(intent);
                             Intent intent1=new Intent();
                             intent1.setAction("com.example.asus.deliveryapplication.broadcast.abc");
-                            sendBroadcast(intent1);
 
                             data.setClass(LoginActivity.this, MyFragment.class);
                             setResult(RESULT_OK, data);
